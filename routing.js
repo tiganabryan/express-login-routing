@@ -26,5 +26,5 @@ function auth(req, res, next) {
 }
 
 app.listen(PORT, () => {
-	log(`server now  file now listening on port ${PORT}:)`);
+	log(`server now listening on port ${PORT}:)`);
 });
