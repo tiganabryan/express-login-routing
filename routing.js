@@ -20,10 +20,19 @@ function auth(req, res, next) {
 	log("auth");
 	if (req.query.password == "fakepassword") {
 		next();
+	} else if (req.query.password == undefined) {
+		// if they go to localhost:5001/login with no query param
+		throw new Error("you have not given a password, please try again");
 	} else {
 		res.send("incorrect password, please try again!");
 	}
 }
+
+app.use((err, req, res, next) => {
+	log(`error :'(`);
+	next(err);
+	log(err);
+});
 
 app.listen(PORT, () => {
 	log(`server now listening on port ${PORT}:)`);
