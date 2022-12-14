@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const customError = require("./customError");
 
 const PORT = process.env.PORT || 5001;
 
@@ -10,7 +11,6 @@ app.use("/media", express.static("public"));
 
 // jumps down to the auth function and runs it -- evaluates the conditions in the query params
 app.route("/login").get(auth, (req, res) => {
-	// res.json({ "test": "json" })
 	res.send("welcome to your dashboard.");
 });
 
@@ -22,7 +22,12 @@ function auth(req, res, next) {
 		next();
 	} else if (req.query.password == undefined) {
 		// if they go to localhost:5001/login with no query param
-		throw new Error("you have not given a password, please try again");
+		// res.status(401);
+		throw new customError(
+			401,
+			"you have not given a password, please try again"
+		);
+		// throw new Error("you have not given a password, please try again");
 	} else {
 		res.send("incorrect password, please try again!");
 	}
