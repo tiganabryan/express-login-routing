@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
 
 const PORT = process.env.PORT || 5001;
 
@@ -27,5 +26,5 @@ function auth(req, res, next) {
 }
 
 app.listen(PORT, () => {
-	log(`test routing file now listening on port ${PORT}:)`);
+	log(`server now  file now listening on port ${PORT}:)`);
 });
